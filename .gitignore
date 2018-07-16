@@ -1,0 +1,9 @@
+__pycache__
+*.pyc
+lecturas
+*.svg
+plantuml
+.ipynb_checkpoints
+*.jpg
+*.svg
+design/decisiones.md
