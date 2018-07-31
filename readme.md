@@ -56,10 +56,11 @@ hotspots indicate the parametrizable points of the framework, where the
 user programmer will provide the required functionalities: Oracle,
 Selector, Model and Dataset.
 
-The \[ **interfaces** \] {} (marked with I in Figure \[fig:
-diagram\_clases\]) are abstract classes with unimplemented methods and /
+The **interfaces** are abstract classes with unimplemented methods and /
 or attributes, therefore they require that a class be implemented that
 implements the methods required by the interface.
+
+![alt text][class diagram]
 
 ### Framework Flow
 
@@ -68,20 +69,21 @@ its case study was taken as a basis. From its architecture a similar one
 was thought that admits modifications to be able to adapt it to other
 projects.
 
-In the flow diagram (Figure \[fig: flow\_diagram\]) we can distinguish
-between *blue* and *red* *figures* being these the *frozen spots* and
-*hotspots* respectively. The workflow determined by the Framework can be
-observed as the loop formed by the frozen spots (blue figures) in said
-figure. It begins by training a *model* from an *algorithm* and *tagged
-data* . This model, once trained, will be evaluated with a part of the
-tagged data that will be separated for this purpose, making them not
-participate in the training of the model. Then we proceed to *predict*
-about *untagged data*its possible labels. They will be sent to the
-*selector* which will select a certain number of instances to be sent to
-the *oracle* . Then this will ask the labeling user to enter the labels
-of each of these instances. Once the tags have been obtained, the main
-loop will be started again, this time using the original tagged data and
-the manually tagged data to train the model.
+In the flow diagram we can distinguish between *blue* and *red* *figures*
+being these the *frozen spots* and *hotspots* respectively. The workflow
+determined by the Framework can be observed as the loop formed by the frozen
+spots (blue figures) in said figure. It begins by training a *model* from an
+*algorithm* and *tagged data* . This model, once trained, will be evaluated
+with a part of the tagged data that will be separated for this purpose, making
+them not participate in the training of the model. Then we proceed to *predict*
+about *untagged data*its possible labels. They will be sent to the *selector*
+which will select a certain number of instances to be sent to the *oracle* .
+Then this will ask the labeling user to enter the labels of each of these
+instances. Once the tags have been obtained, the main loop will be started
+again, this time using the original tagged data and the manually tagged data to
+train the model.
+
+![alt_text][architecture]
 
 As we can see in Figure \[fig: flow\_diagram\] the main loop is already
 determined by the framework. But it is the user programmer who decides
@@ -449,3 +451,6 @@ Since generality is sought, the framework will not provide features
 extraction features, but it is expected that users provide the
 vectorized dataset, ie a list of instances where each in turn is a list
 containing the values ​​of the features.
+
+[architecture]: https://writelatex.s3.amazonaws.com/nfzhskrjkrsm/uploads/533/24106368/1.jpg?X-Amz-Expires=14400&X-Amz-Date=20180727T152342Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJF667VKUK4OW3LCA/20180727/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=e448e7c2a5b65c1abe6dd2d5eda085c67315ed0c06fd2d3b0ebf2763d30a8b38 "Architecture"
+[class diagram]: https://writelatex.s3.amazonaws.com/nfzhskrjkrsm/uploads/1287/24531380/1.jpg?X-Amz-Expires=14400&X-Amz-Date=20180727T152348Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJF667VKUK4OW3LCA/20180727/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=6c160b86cf07916319b4a75da39542551c6538559bc26d5eaabeab68ebefb22a "Class Diagram"
