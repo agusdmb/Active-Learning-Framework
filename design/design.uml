@@ -1,17 +1,16 @@
 @startuml
-
 class ActiveLerner {
     +fit()
     +select(n: Int): Int[]
-    +ask(indexes: Int[]): Int[]
-    +add_new_known(indexes: Int[], y: Int[])
-    +test(): Float
-    +get_avgs(): Float[]
+    +ask(indices: Int[]): Int[]
+    +tag_elements(indices: Int[], y: Int[])
+    +change_selector(Selector)
+    +get_scores(): Int[]
+    -_test(): Float
 }
 
 package Hotspots {
     Interface Selector {
-        -query(model: Model, data: Float[][], n: Int): Int[]
         +select(model: Model, data: Float[][], n: Int): Int[]
     }
 
@@ -33,33 +32,19 @@ package Hotspots {
 }
 
 package User {
-    Interface DatasetTrain {
+    Interface Dataset {
         + X: Float[][]
         + y: Int[]
-        +append(X: Float[][], y: Int[])
-        -_separate_test(test_size: Float, random_state: Int)
-    }
-
-    Interface DatasetUnlabeled {
-        + X: Float[][]
-        +remove_elements(indexes: Int[])
-        +get_element_readable(i: Int)
-    }
-}
-
-class SKLModel {
-}
-
-package Models {
-    class MultinomialNBModel {
-    }
-    class SVCModel {
-    }
-    class DecisionTreeClassifierModel {
-    }
-    class LogisticRegressionModel {
-    }
-    class MLPClassifierModel {
+        + X_unlabeled: Float[][]
+        +tag_elements(indices: Int[], tags: Int[])
+        +get_unlabeled_readable(i: Int): String[]
+        +get_X(): Float[][]
+        +get_y(): Int[]
+        +get_X_unlabeled(): Float[][]
+        +get_unlabeled(): Float[][]
+        -_split_X(test_size: Float, random_state: Int)
+        -_get_train_indices(): Int[]
+        -_get_unlabeled_indices(): Int[]
     }
 }
 
@@ -67,6 +52,10 @@ package Selectors {
     class UncertaintySelector {
         }
     class CertaintySelector {
+        }
+    class MinDiffSelector {
+        }
+    class EntropySelector {
         }
     class RandomSelector {
         }
@@ -76,10 +65,6 @@ package Selectors {
 ActiveLerner o-- Selector
 ActiveLerner o-- Model
 ActiveLerner o-- Oracle
-ActiveLerner o-- DatasetTrain
-ActiveLerner o-- DatasetUnlabeled
-Model <|-- SKLModel
-SKLModel <|-- Models
+ActiveLerner o-- Dataset
 Selector <|-- Selectors
-
 @enduml
